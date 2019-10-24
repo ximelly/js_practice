@@ -71,6 +71,30 @@
             arr[2].age=29;
             render($container,arr);
         }
+
+        //虚拟dom转换成真实dom
+        function creatElement(vNode){
+            if(!vNode.tag){
+                return null;
+            }
+            let el=document.creatElement(vNode.tag),//创建真是dom元素
+                attrs=vNode.attrs||{};
+                children=vNode.children||[];
+
+            //获取属性
+            for(let attr in attrs){
+                if(attrs.hasOwnProperty(attr)){
+                    el.setAttribute(attr,attrs[attr]);
+                }
+            }
+
+            //获取子元素
+            children.forEach(item=>{
+                el.appendChild(creatElement(item));
+            })
+
+            return el;
+        }
     </script>
 </body>
 </html>
