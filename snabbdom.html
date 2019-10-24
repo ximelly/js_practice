@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom.min.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-class.min.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-style.min.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-props.min.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-eventlisteners.min.js"></script>
+    <script src="https://cdn.bootcss.com/snabbdom/0.7.3/h.min.js"></script>
+</head>
+<body>
+    <div id="wrap"></div>
+    <button id="change">change</button>
+    <script type="text/javascript">
+        var patch = snabbdom.init([
+          snabbdom_class,
+          snabbdom_props,
+          snabbdom_style,
+          snabbdom_eventlisteners,
+        ]);
+        var h = snabbdom.h; 
+
+        var container = document.getElementById('wrap');
+        let vNode=h("ul.container",{},[
+                h("li.item",{},["item 1"]),
+                h("li.item",{},["item 2"]),
+                h("li.item",{},["item 3"])]);
+        patch(container,vNode);
+
+        document.getElementById("change").onclick=function(){
+            console.log("更新数据");
+            let newNode=h("ul.container",{},[
+                h("li.item",{},["item 1"]),
+                h("li.item",{},["haha"]),
+                h("li.item",{},["item 3"])]);
+            patch(vNode,newNode);
+        }
+    </script>
+</body>
+</html>
