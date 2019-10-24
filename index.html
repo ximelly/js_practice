@@ -16,6 +16,7 @@
     <div id="wrap"></div>
     <button id="change">change</button>
     <script type="text/javascript">
+        //获取patch、h函数
         let patch = snabbdom.init([
           snabbdom_class,
           snabbdom_props,
@@ -24,21 +25,51 @@
         ]);
         let h = snabbdom.h; 
 
+        //获取dom对象
         let $container = document.getElementById('wrap'),
-             $change=document.getElementById("change");
+             $change=document.getElementById("change"),
+             vNode;
 
-        let vNode=h("ul.container",{},[
-                h("li.item",{},["item 1"]),
-                h("li.item",{},["item 2"]),
-                h("li.item",{},["item 3"])]);
-        patch($container,vNode);
+        let arr=[{
+            name:"ximelly",
+            age:29,
+            like:"table tennis"
+        },{
+            name:"dusan",
+            age:28,
+            like:"coding"
+        }]
+
+        //添加表头
+        arr.unshift({
+            name:"name",
+            age:"age",
+            like:"like"
+        })
+        function render(container,data){
+            let newNode=h("table",{},data.map(child=>{
+                let tds=[];
+                for(let td in child){
+                    if(child.hasOwnProperty(td)){
+                        tds.push(h("td.item",{},child[td]+""));
+                    }
+                }
+                return h("tr",{},tds)
+            }));
+            if(vNode){
+                patch(vNode,newNode);
+            }else{
+                patch(container,newNode);
+            }
+            //保存之前的node
+            vNode=newNode;
+        }
+        render($container,arr);
 
         $change.onclick=function(){
-            let newNode=h("ul.container",{},[
-                h("li.item",{},["item 1"]),
-                h("li.item",{},["haha"]),
-                h("li.item",{},["item 3"])]);
-            patch(vNode,newNode);
+            arr[1].like='tennis';
+            arr[2].age=29;
+            render($container,arr);
         }
     </script>
 </body>
