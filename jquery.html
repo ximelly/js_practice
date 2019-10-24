@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+</head>
+<body>
+    <div class="wrap"></div>
+    <button>change</button>
+    <script type="text/javascript">
+        let arr=[{
+            name:"ximelly",
+            age:29,
+            like:"table tennis"
+        },{
+            name:"dusan",
+            age:28,
+            like:"coding"
+        }]
+
+        function render(container,data){
+            let dom=$(container);
+            dom.html("");
+            let table=$("<table>");
+            table.append("<tr><td>name</td><td>age</td><td>like</td></tr>");
+            data.forEach(item=>{
+                table.append(`<tr><td>${item.name}</td><td>${item.age}</td><td>${item.like}</td></tr>`);
+            })
+            dom.append(table);
+        }
+        render(".wrap",arr);
+
+        $("button").click(function(){
+            arr[0].like='tennis';
+            arr[1].age=29;
+            render(".wrap",arr);
+        })
+    </script>
+</body>
+</html>
