@@ -9,7 +9,7 @@
 </head>
 <body>
     <script type="text/javascript">
-        let obj={};
+        /*let obj={};
         let _name="ximelly";
         Object.defineProperty(obj,"name",{
             get(){
@@ -21,7 +21,28 @@
         });
         console.log(obj.name);
         obj.name="dusan";
-        console.log(obj.name);
+        console.log(obj.name);*/
+
+
+        let vm={};
+        let data={
+            name:"ximelly",
+            age:29
+        }
+
+        for(let key in data){
+            if(key){
+                Object.defineProperty(vm,key,{
+                    get(){
+                        return data[key];
+                    },
+                    set(val){
+                        data[key]=val;
+                    }
+                });
+            }
+        }
+        console.log(vm.name,vm.age);
     </script>
 </body>
 </html>
