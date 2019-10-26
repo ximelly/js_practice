@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <script src="js/assert.js"></script>
+    <style type="text/css">
+        ul.show{
+            display: block;
+        }
+        ul{
+            display: none;
+        }
+        li.active{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap"></div>
+    <script type="text/javascript">
+    class List{
+        constructor(parent,index=0,data=[]){
+            assert(parent,"parent cannot be empty");
+            assert(typeof index=="number","index must be number");
+            assert(data instanceof Array,"data must be Array");
+            
+            if(parent instanceof HTMLElement){
+                this.parent=parent;
+            }else if(typeof parent=="string"){
+                this.parent=document.querySelector(parent);
+            }else{
+                assert(false,"parent typeError");
+            }
+            assert(this.parent,"parent cannot find");
+            this.index=index;
+            this.data=data;
+            this.render();
+        }
+        getIndex(){
+            return this.index;
+        }
+        setIndex(index){
+            assert(typeof index=="number","index must be number");
+            this.index=index;
+            this.render();
+        }
+        showList(){
+            this.ul.classList.add("show");
+        }
+        hideList(){
+            this.ul.classList.remove("show");
+        }
+        getData(){
+            return this.data;
+        }
+        setData(data){
+            assert(data instanceof Array,"data must be Array");
+            this.data=data;
+            this.render();
+        }
+        render(){
+
+            //处理title
+            let title=document.createElement("div"),
+                lis=[];
+            title.innerHTML=this.data[this.index];
+
+            //处理列表
+            this.ul=document.createElement("ul");
+            this.data.forEach((item,index)=>{
+                let li=document.createElement("li");
+                if(index==this.index){
+                    lis.push(`<li data-index=${index} class="active">${item}</li>`)
+                }else{
+                    lis.push(`<li data-index=${index}>${item}</li>`)
+                }
+                
+            })
+
+            this.ul.innerHTML=lis.join("");
+            this.parent.innerHTML="";
+            this.parent.appendChild(title);
+            this.parent.appendChild(this.ul);
+
+            //绑定事件
+            title.addEventListener("click", (ev)=>{
+                ev.stopPropagation();
+                this.showList();
+            }, false)
+            this.ul.addEventListener("click", (ev)=>{
+                let curIndex=ev.target.dataset.index;
+                this.setIndex(Number(curIndex));
+            }, false)
+            document.addEventListener("click", ()=>{
+                this.hideList();
+            }, false)
+        }
+    }
+    let wrap=document.getElementById("wrap");
+    let list=new List(wrap,1,[1,2,3,4]);
+    //let list=new List("#wrap","I am title",[1,2,3,4]);
+    </script>
+</body>
+</html>

@@ -12,6 +12,9 @@
     class List{
         constructor(parent,title="",data=[]){
             assert(parent,"parent cannot be empty");
+            assert(typeof title=="string","title must be string");
+            assert(data instanceof Array,"data must be Array");
+            
             if(parent instanceof HTMLElement){
                 this.parent=parent;
             }else if(typeof parent=="string"){
@@ -20,8 +23,6 @@
                 assert(false,"parent typeError");
             }
             assert(this.parent,"parent cannot find");
-            assert(typeof title=="string","title must be string");
-            assert(data instanceof Array,"data must be Array");
             this.title=title;
             this.data=data;
             this.render();
