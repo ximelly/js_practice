@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <script src="js/assert.js"></script>
+</head>
+<body>
+    <div id="wrap"></div>
+    <script type="text/javascript">
+    class List{
+        constructor(parent,title="",data=[]){
+            assert(parent,"parent cannot be empty");
+            if(parent instanceof HTMLElement){
+                this.parent=parent;
+            }else if(typeof parent=="string"){
+                this.parent=document.querySelector(parent);
+            }else{
+                assert(false,"parent typeError");
+            }
+            assert(this.parent,"parent cannot find");
+            assert(typeof title=="string","title must be string");
+            assert(data instanceof Array,"data must be Array");
+            this.title=title;
+            this.data=data;
+            this.render();
+        }
+        getTitle(){
+            return this.title;
+        }
+        setTitle(title){
+            assert(typeof title=="string","title must be string");
+            this.title=title;
+            this.render();
+        }
+        getData(){
+            return this.data;
+        }
+        setData(data){
+            assert(data instanceof Array,"data must be Array");
+            this.data=data;
+            this.render();
+        }
+        render(){
+            let title=document.createElement("div");
+            title.innerHTML=this.title;
+
+            let ul=document.createElement("ul"),lis=[];
+            this.data.forEach(item=>{
+                lis.push(`<li>${item}</li>`)
+            })
+            ul.innerHTML=lis.join("");
+            this.parent.innerHTML="";
+            this.parent.appendChild(title);
+            this.parent.appendChild(ul);
+        }
+    }
+    let wrap=document.getElementById("wrap");
+    let list=new List(wrap,"I am title",[1,2,3,4]);
+    //let list=new List("#wrap","I am title",[1,2,3,4]);
+    </script>
+</body>
+</html>
