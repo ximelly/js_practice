@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <script src="js/assert.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div></div>
+        <cmp></cmp>
+        <tableBar></tableBar>
+    </div>
+    <script type="text/javascript">
+
+    function render(options){
+        assert(options.root,"root cannot be empty");
+        if(options.root instanceof HTMLElement){
+            this.root=options.root;
+        }else if(typeof options.root=="string"){
+            this.root=document.querySelector(options.root);
+            assert(this.root,"root cannot find");
+        }else{
+            assert(false,"root typeError");
+        }
+
+        //对components里面的组件做单独处理
+        let elements=this.root.getElementsByTagName("*");
+        [...elements].forEach(item=>{
+            if(item instanceof HTMLUnknownElement){
+                for(let component in options.components){
+                    if(component.toLowerCase()===item.tagName.toLowerCase()){
+                        let Cmp=options.components[component],
+                        cmp=new Cmp();
+                        let innerHtml=cmp.render();
+
+                        //节点替换
+                        item.parentNode.replaceChild(innerHtml,item);
+                    }
+                }
+            }
+        });
+    }
+
+    class Component{
+        constructor(){
+
+        }
+        render(){
+            throw new Error("render in needed");
+        }
+    }
+
+    class Cmp extends Component{
+        constructor(){
+            super();
+        }
+        render(){
+            let div=document.createElement("div");
+            div.innerHTML="hello cmp";
+            return div;
+        }
+    }
+
+    class TableBar extends Component{
+        constructor(){
+            super();
+        }
+        render(){
+            let div=document.createElement("div");
+            div.innerHTML="hello TableBar";
+            return div;
+        }
+    }
+
+    let wrap=document.getElementById("wrap");
+    render({
+        root:wrap,
+        components:{
+            Cmp,
+            TableBar
+        },
+    });
+    </script>
+</body>
+</html>
