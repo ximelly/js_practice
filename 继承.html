@@ -22,6 +22,8 @@
     }
     //将B的原型指向A的实例，这样给B的原型添加方法的时候不会污染A的原型
     B.prototype=a;
+    //重新赋值constructor,因为此时B.prototype.constructor为function A
+    B.prototype.constructor=B;
     B.prototype.getAge=function(){
         return this.age;
     }
