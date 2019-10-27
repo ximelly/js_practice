@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+    function A(name){
+        this.name=name;
+    }
+    A.prototype.say=function(){
+        return "hello,"+this.name;
+    }
+    var a=new A("ximelly");
+
+    function B(name,age){
+        //执行构造函数A,this为B
+        A.call(this,name);
+    }
+    //将B的原型指向A的实例，这样给B的原型添加方法的时候不会污染A的原型
+    B.prototype=a;
+    var b=new B("dusan",28);
+    console.log(b.name,b.say());
+    </script>
+</body>
+</html>
