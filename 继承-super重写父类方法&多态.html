@@ -28,8 +28,31 @@
             return super.salary()+1000;
         }
     }
-    var b=new Coder("dusan","信息技术部",5000,"java");
-    console.log(b.salary());
+
+    class Designer extends Staff{
+        constructor(name,depart,basicSalary,language){
+            super(name,depart,basicSalary);
+            this.language=language;
+        }
+        salary(){
+            //引用父类的方法
+            return super.salary()+800;
+        }
+    }
+
+    let staff=[
+                new Coder("dusan","信息技术部",5000,"java"),
+                new Coder("ximelly","信息技术部",5000,"java"),
+                new Coder("lucy","信息技术部",3000,"java"),
+                new Designer("tony","信息技术部",5400,"ps")
+            ];
+
+    //多态
+    let sum=0;
+    staff.forEach(item=>{
+        sum+=item.salary();
+    })
+    console.log(sum);
     </script>
 </body>
 </html>
