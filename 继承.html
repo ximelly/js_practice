@@ -18,11 +18,15 @@
     function B(name,age){
         //执行构造函数A,this为B
         A.call(this,name);
+        this.age=age;
     }
     //将B的原型指向A的实例，这样给B的原型添加方法的时候不会污染A的原型
     B.prototype=a;
+    B.prototype.getAge=function(){
+        return this.age;
+    }
     var b=new B("dusan",28);
-    console.log(b.name,b.say());
+    console.log(b.name,b.say(),b.getAge());
     </script>
 </body>
 </html>

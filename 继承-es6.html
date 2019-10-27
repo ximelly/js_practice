@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+    class A{
+        constructor(name){
+            this.name=name;
+        }
+        say(){
+            return "hello,"+this.name;
+        }
+    } 
+    var a=new A("ximelly");
+
+    class B extends A{
+        constructor(name,age){
+            super(name);
+            this.age=age;
+        }
+        getAge(){
+            return this.age;
+        }
+    }
+    var b=new B("dusan",28);
+    console.log(b.name,b.say(),b.getAge());
+    </script>
+</body>
+</html>
