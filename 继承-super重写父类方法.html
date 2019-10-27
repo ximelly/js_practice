@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+    class Staff{
+        constructor(name,depart,basicSalary){
+            this.name=name;
+            this.depart=depart;
+            this.basicSalary=basicSalary;
+        }
+        salary(){
+            return this.basicSalary-500;
+        }
+    }
+
+    class Coder extends Staff{
+        constructor(name,depart,basicSalary,language){
+            super(name,depart,basicSalary);
+            this.language=language;
+        }
+        salary(){
+            //引用父类的方法
+            return super.salary()+1000;
+        }
+    }
+    var b=new Coder("dusan","信息技术部",5000,"java");
+    console.log(b.salary());
+    </script>
+</body>
+</html>
