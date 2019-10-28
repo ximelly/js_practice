@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        Array.prototype.reduce=function(cb,initVaulue){
+            var start=0;
+            if(typeof initVaulue=="undefined"){
+                start=1;
+                initVaulue=this[0];
+            }
+            for(start;start<this.length;start++){
+                initVaulue=cb(initVaulue,this[start],start);
+            }
+            return initVaulue;
+        }
+
+        let result=[1,2,3].reduce(function(pre,item,index){
+            return pre+item;
+        },100);
+        console.log(result);
+    </script>
+</body>
+</html>
