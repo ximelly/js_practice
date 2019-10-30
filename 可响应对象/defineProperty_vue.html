@@ -8,6 +8,8 @@
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 </head>
 <body>
+<!-- defineProperty问题：监听不完整；递归 -->
+<!-- arr、img里面的内容改变时兼听不到 -->
     <script type="text/javascript">
         class App{
             constructor(opt){
@@ -20,12 +22,23 @@
                                 return data[key];
                             },
                             set(val){
-                                console.log("触发data设置");
+                                this.render();
                                 data[key]=val;
                             }
                         });
                     }
                 }
+            }
+            $set(obj,key,value){//调用app.$set(app.arr,1,33333)
+                this._updated=false;
+                obj[key]=value;//name\age本来就可以被defineProperty监听到，此时不用render
+                if(!this._updated){
+                    this.render();
+                }
+            }
+            render(){
+                console.log("触发render");
+                this._updated=true;
             }
         }
         let app=new App({
@@ -33,7 +46,12 @@
             data(){//为什么是返回一个函数？当创建多个实例时data数据是独立的
                 return {
                     name:"ximelly",
-                    age:29
+                    age:29,
+                    arr:[1,2,3],
+                    img:{
+                        width:800,
+                        height:900
+                    }
                 }
             }
         });
