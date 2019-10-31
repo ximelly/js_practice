@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <style type="text/css">
+        .column_container{
+            position:relative;
+            padding:0 100px;
+            box-sizing: border-box;
+        }
+        .column_left,.column_right{
+            position: absolute;
+            top:0;
+            width:100px;
+        }
+        .column_left{
+            left:0;
+            background:red;
+        }
+        .column_right{
+            right:0;
+            background:green;
+        }
+        .column_center{
+            background:blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="column_container">
+        <div class="column_left">1</div>
+        <div class="column_center">2</div>
+        <div class="column_right">3</div>
+    </div>
+</body>
+</html>
