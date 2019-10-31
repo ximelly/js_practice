@@ -6,16 +6,10 @@
     <title></title>
     <style type="text/css">
         .column_container{
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
         }
         .column_left,.column_right{
             width:100px;
-            /* flex-basis:100px;
-            ** 如果不是固定，需要根据实际情况伸缩，可以使用flex-basis 
-            ** flex-grow 属性定义弹性盒子项（flex item）的拉伸因子
-            */
+            float:left;
         }
         .column_left{
             background:red;
@@ -24,10 +18,8 @@
             background:green;
         }
         .column_center{
-            background:blue;
-            -webkit-box-flex:1;
-                -ms-flex:1;
-                    flex:1;
+            width:calc(100% - 200px);
+            float:left;
         }
     </style>
 </head>
