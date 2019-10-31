@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <script src="../js/assert.js"></script>
+</head>
+<body>
+    <div id="wrap"></div>
+    <script type="text/javascript">
+    class List{
+        constructor(options){
+            this.root=this._getRooter(options);
+            this.data=this._getData(options.data);
+            for(let key in this.data){
+                if(key){
+                    Object.defineProperty(this,key,{
+                        configurable:true,
+                        get(){
+                            return this.data[key];
+                        },
+                        set(val){
+                            this.data[key]=val;
+                            this.render();
+                        }
+                    });
+                }
+            }
+            this.render();
+        }
+        _getRooter(options){
+            assert(options.root,"root cannot be empty");
+            let root;
+            if(options.root instanceof HTMLElement){
+                root=options.root;
+            }else if(typeof options.root=="string"){
+                root=document.querySelector(options.root);
+            }else{
+                assert(false,"root typeError");
+            }
+            assert(root,"root cannot find");
+            return root;
+        }
+        _getData(data){
+            assert(data,"options.data is needed");
+            assert(typeof data=="function","options.data must be function");
+            let result;
+            result=data();
+            assert(data instanceof Object,"data must be Object");
+            return result;
+        }
+        $set(obj,key,value){//调用list.$set(list.data.list,1,"we")
+            this._updated=false;
+            obj[key]=value;//title本来就可以被defineProperty监听到，此时不用render
+            if(!this._updated){
+                this.render();
+            }
+        }
+        render(){
+            console.log("渲染");
+            let title=document.createElement("div");
+            title.innerHTML=this.data.title;
+
+            let ul=document.createElement("ul"),lis=[];
+            this.data.list.forEach(item=>{
+                lis.push(`<li>${item}</li>`)
+            })
+            ul.innerHTML=lis.join("");
+            this.root.innerHTML="";
+            this.root.appendChild(title);
+            this.root.appendChild(ul);
+            this._updated=true;
+        }
+    }
+    let wrap=document.getElementById("wrap");
+    let list=new List({
+        root:wrap,
+        data:function(){
+            return{
+                title:"I am title",
+                list:[1,2,3,4]
+            }
+        }
+    });
+    </script>
+</body>
+</html>
