@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #header{
+            height: 3rem;
+            display: flex;
+        }
+        #div1{
+            width: 2rem;
+            height: 3rem;
+            background-color: red;
+            float: left;
+        }
+        #div2{
+            flex: 1;
+            /*width: 5.4rem;*/
+            height: 3rem;
+            background-color: blue;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div id="div1"></div>
+        <div id="div2"></div>
+    </div>
+
+    <script src="js/rem.js"></script>
+</body>
+</html>
