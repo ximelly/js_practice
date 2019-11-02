@@ -2,6 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <style type="text/css">
+            *{
+                margin:0;
+                padding:0;
+                
+            }
+        </style>
     </head>
     <body>
         <div id="parent">
@@ -18,14 +25,12 @@
                 childNodes=parent.childNodes//NodeList(9) [text, span, text, div#pr, text, p, text, comment, text]
 
             parent.childNodes.forEach(function(item){//3,1,3,1,3,1,3,8,3
-                if(item.nodeType==document.ElEMENT_NODE){
-                    console.log(item.nodeType+" is document.ElEMENT_NODE");
+                if(item.nodeType==document.ELEMENT_NODE){
+                    console.log(item,item.nodeType+" is document.ELEMENT_NODE");
                 }else if(item.nodeType==document.TEXT_NODE){
-                    console.log(item.nodeType+" is document.TEXT_NODE");
+                    console.log(item,item.nodeType+" is document.TEXT_NODE");
                 }else if(item.nodeType==document.COMMENT_NODE){
-                    console.log(item.nodeType+" is document.COMMENT_NODE");
-                }else{
-                    console.log(item.nodeType);
+                    console.log(item,item.nodeType+" is document.COMMENT_NODE");
                 }
             })
             /*
@@ -34,7 +39,7 @@
                 children：只包含元素节点
                 childNodes：所有节点=元素+文本+注释+...
             节点类型 nodeType  数字
-            1:document.ElEMENT_NODE
+            1:document.ELEMENT_NODE
             3:document.TEXT_NODE
             8:document.COMMENT_NODE
             9:document.DUCUMENT_NODE
