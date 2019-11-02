@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        let obj=[1,2,3,4,5];
+        let p=new Proxy(obj,{
+            get(data,name){
+                if(name in data){
+                    return data[name];
+                }else{
+                    throw new Error(`${name} is not defined`)
+                }
+            },
+            set(data,name,val){
+                data[name]=val;
+            }
+        })
+    </script>
+</body>
+</html>
