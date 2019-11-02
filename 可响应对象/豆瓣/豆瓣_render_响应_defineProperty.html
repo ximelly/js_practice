@@ -9,7 +9,7 @@
 <body>
     <div id="wrap"></div>
     <script type="text/javascript">
-    class List{
+    class Cmp{
         constructor(options){
             this.root=this._getRooter(options);
             this.data=this._getData(options.data);
@@ -74,7 +74,7 @@
         }
     }
     let wrap=document.getElementById("wrap");
-    let list=new List({
+    let cmp=new Cmp({
         root:wrap,
         data:function(){
             return{
