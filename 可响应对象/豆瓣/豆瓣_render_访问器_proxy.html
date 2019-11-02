@@ -32,8 +32,7 @@
         _getData(data){
             assert(data,"options.data is needed");
             assert(typeof data=="function","options.data must be function");
-            let result;
-            result=data();
+            let result=data();
             assert(data instanceof Object,"data must be Object");
             return result;
         }
