@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <script src="../../js/assert.js"></script>
+    <script src="common.js"></script>
+</head>
+<body>
+    <div id="wrap"></div>
+    <script type="text/javascript">
+        let Cmp=creatCls(class{
+            render(){
+                console.log("渲染");
+                let title=document.createElement("div");
+                title.innerHTML=this.data.title;
+
+                let ul=document.createElement("ul"),lis=[];
+                this.data.list.forEach(item=>{
+                    lis.push(`<li>${item}</li>`)
+                })
+                ul.innerHTML=lis.join("");
+                this.root.innerHTML="";
+                this.root.appendChild(title);
+                this.root.appendChild(ul);
+                this._updated=true;
+            }
+        });
+        let cmp=new Cmp({
+            root:document.getElementById("wrap"),
+            data:function(){
+                return{
+                    title:"I am title",
+                    list:[1,2,3,4]
+                }
+            }
+        });
+    </script>
+</body>
+</html>
