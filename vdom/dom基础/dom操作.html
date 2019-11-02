@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            *{
+                margin:0;
+                padding:0;
+                
+            }
+        </style>
+    </head>
+    <body>
+        <div id="parent">
+            <span id="first">1</span>
+            <div id="pr">2</div>
+            <p>3</p>
+            4
+            <!-- 5 -->
+        </div>
+        <script>
+            let parent=document.getElementById("parent"),
+                first=document.getElementById("first"),
+                pr=document.getElementById("pr"),
+                el=document.createElement("div"),
+                text=document.createTextNode("I am textNode"),
+                cmt=document.createComment("I am comment");
+            el.innerHTML="add node"
+            parent.appendChild(el);
+            parent.insertBefore(cmt,pr);
+            parent.replaceChild(text,pr);
+            parent.removeChild(first);
+
+            /*
+            创建
+                元素节点  createElement()
+                文本节点  createTextNode()
+                注释节点  createComment()
+
+            添加节点  
+                parent.appendChild(el)
+                parent.insertBefore(el,who的前面)
+
+            替换节点
+                parent.replaceChild(el,替换who);
+
+            删除节点
+                parent.removeChild(el);
+            */
+        </script>
+    </body>
+</html>
