@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        class A{
+            render(){
+                console.log("触发render");
+            }
+        }
+        let p=new Proxy(A,{
+            //construct  不是constructor
+            //创建实例的时候会被拦截
+            construct(cls,args){
+                let obj=new cls();
+                return new Proxy(obj,{
+                    get(data,key){
+                        return data[key];
+                    },
+                    set(data,key,value){
+                        data[key]=value;
+                        data.render();
+                    }
+                });
+            }
+        })
+        let a=new p(2,3,5);
+
+    </script>
+</body>
+</html>

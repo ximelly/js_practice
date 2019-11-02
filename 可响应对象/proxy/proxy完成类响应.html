@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        class A{
+            render(){
+                console.log("触发render");
+            }
+        }
+        let p=new Proxy(new A(),{
+            get(data,key){
+                return data[key];
+            },
+            set(data,key,value){
+                data[key]=value;
+                data.render();
+            }
+        })
+
+    </script>
+</body>
+</html>
