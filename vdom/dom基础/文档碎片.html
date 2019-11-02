@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            *{
+                margin:0;
+                padding:0;
+                
+            }
+        </style>
+    </head>
+    <body>
+        <div id="parent"></div>
+        <script>
+            let parent=document.getElementById("parent"),
+                frag=document.createDocumentFragment(),
+                div=document.createElement("div"),
+                ul=document.createElement("ul");
+            div.innerHTML="hello div";
+            ul.innerHTML="<li>1</li><li>2</li><li>3</li><li>4</li>";
+            frag.appendChild(div);
+            frag.appendChild(ul);
+            parent.appendChild(frag);
+
+            /*
+            创建文档碎片  createDocumentFragment();
+            特点：插入文档之后frag消失
+            */
+        </script>
+    </body>
+</html>
