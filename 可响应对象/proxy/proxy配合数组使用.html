@@ -17,9 +17,19 @@
                 }
             },
             set(data,name,val){
+                console.log(`set${name}为${val}`);
                 data[name]=val;
+                return true;//表示操作可以继续
             }
         })
+
+        p.push(88)
+
+        /*实际上会执行两次set，
+        set5为88
+        setlength为6
+        pop()同理*/
+
     </script>
 </body>
 </html>
