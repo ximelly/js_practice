@@ -6,7 +6,6 @@
             *{
                 margin:0;
                 padding:0;
-                
             }
         </style>
     </head>
@@ -31,8 +30,10 @@
             console.log(div1.getAttribute("color"));
 
             //获取所有属性
-            console.log(div1.attributes);
-
+            let attrs=div1.attributes;
+            Array.from(attrs).forEach(attr=>{
+                console.log(attr.name,attr.value);
+            })
             /*
             获取||设置元素属性
                 标准html属性x.name  x.getAttribute(name)
