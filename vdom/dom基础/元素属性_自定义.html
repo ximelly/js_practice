@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+        </style>
+    </head>
+    <body>
+        <div id="div1" data-title="I am title" data-color="red"></div>
+        <script>
+            let div1=document.getElementById("div1"),
+            attrs=div1.dataset;
+            console.log(attrs);
+            //color: "red"
+            //title: "I am title"
+
+            /*
+            自定义属性一般使用data-name
+            获取使用x.dataset.name
+            */
+
+        </script>
+    </body>
+</html>

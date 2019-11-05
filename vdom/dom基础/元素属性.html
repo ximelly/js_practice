@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            *{
+                margin:0;
+                padding:0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="div1" title="I am title" color="red"></div>
+        <script>
+            let div1=document.getElementById("div1");
+
+            //获取属性
+            console.log(div1.title);
+            console.log(div1.getAttribute("title"));
+            console.log(div1.getAttribute("color"));
+
+            //设置属性
+            div1.title="I am title2";
+            console.log(div1.getAttribute("title"));
+
+            div1.color="green";
+            console.log(div1.getAttribute("color"));//非html标准属性 设置不成功
+
+            div1.setAttribute("color","green");
+            console.log(div1.getAttribute("color"));
+
+            //获取所有属性
+            let attrs=div1.attributes;
+            Array.from(attrs).forEach(attr=>{
+                console.log(attr.name,attr.value);
+            })
+            /*
+            获取||设置元素属性
+                标准html属性x.name  x.getAttribute(name)
+                自定义属性：x.getAttribute(name)  x.getAttribute(name,value)
+            */
+
+        </script>
+    </body>
+</html>

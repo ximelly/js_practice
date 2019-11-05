@@ -6,6 +6,13 @@
     <title></title>
 </head>
 <body>
+    <div id="root"></div>
+
+    <div id="template">
+        <h2 id="title"></h2>
+        <h3>haha</h3>
+    </div>
+
     <script type="text/javascript">
         let obj=[1,2,3,4,5];
         let p=new Proxy(obj,{
@@ -17,9 +24,48 @@
                 }
             },
             set(data,name,val){
+                console.log(`set${name}为${val}`);
                 data[name]=val;
+                render();
+                return true;//表示操作可以继续
             }
         })
+
+        //避免多次重复执行render
+        let timer=null,
+            root=document.getElementById("root"),
+            template=document.getElementById("template"),
+            flag=document.createDocumentFragment().appendChild(template);
+
+
+        function render(){
+            clearTimeout(timer);
+            timer=setTimeout(()=>{
+                root.innerHTML="";
+                console.log("render");
+                obj.forEach((item,index)=>{
+                    let el=flag.cloneNode(true);
+                    el.children[0].innerHTML=item;
+                    root.appendChild(el);
+                });
+            },0)
+        }
+
+        p.push(88);
+        p.shift();
+
+        /*
+        push()----pop()同理
+        实际上会执行两次set，
+        1、set 5为88
+        2、set length为6
+        */
+
+        /*
+        shift()
+        会执行length次
+        其中length-1次为元素位置调整，最后一次为length改变
+        */
     </script>
 </body>
 </html>

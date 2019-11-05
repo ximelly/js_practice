@@ -8,6 +8,17 @@
                 padding:0;
                 
             }
+            #pr1,#pr2{
+                margin:20px;
+                border-width: 1px;
+                border-style: solid;
+            }
+            #pr1{
+                border-color:green;
+            }
+            #pr2{
+                border-color:red;
+            }
         </style>
     </head>
     <body>
@@ -18,6 +29,14 @@
             4
             <!-- 5 -->
         </div>
+
+        <div id="pr1">
+            <span>123</span>
+        </div>
+        <div id="pr2">
+            <span>abc</span>
+        </div>
+
         <script>
             let parent=document.getElementById("parent"),
                 first=document.getElementById("first"),
@@ -47,6 +66,15 @@
             删除节点
                 parent.removeChild(el);
             */
+           
+
+            //把一个元素添加到另外一个元素中后，该元素相当于剪切走了
+            let span=document.querySelector("#pr1 span"),
+                div=document.getElementById("pr2"),
+                flag=document.createDocumentFragment();
+            div.appendChild(span);
+            flag.appendChild(span);
+
         </script>
     </body>
 </html>
