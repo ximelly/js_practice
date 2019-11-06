@@ -28,6 +28,8 @@ class LXM{
         this.data=_getData(options.data);
         this._template=this._root.cloneNode(true);//保存模板
         this._parent=this._root.parentNode;//父元素
+        this._methods=options.methods||{};//保存方法
+
         let _this=this;
         let proxy=new Proxy(this.data,{
                 get(data,key){
@@ -35,16 +37,19 @@ class LXM{
                     return data[key];
                 },
                 set(data,key,value){
+                    console.log(`触发set ${key}`);
                     data[key]=value;
                     _this.render();
                 }
             });
+        this._proxy=proxy;
         this.render();
         return proxy;//实例就是这个proxy
     }
 
     render(){
         let root=this._template.cloneNode(true);
+        //替换模板中的变量
         [...root.childNodes].forEach(child=>{
             if(child.nodeType==document.ELEMENT_NODE){
                 child.innerHTML=this._replace.apply(this,[child.innerHTML,"innerHTML"]);
@@ -52,6 +57,25 @@ class LXM{
                 child.data=this._replace.apply(this,[child.data,"data"]);
             }
         })
+
+        //查找所有的事件
+        Array.from(root.children).forEach((child)=>{
+            Array.from(child.attributes).forEach((attr)=>{
+                if(attr.name.startsWith("@")){
+                    let evName=attr.name.substring(1);
+                    child.addEventListener(evName,()=>{
+                        //处理事件
+                        let arr=[];
+                        for(let key in this._methods){
+                            arr.push(`let ${key}=this._methods[${JSON.stringify(key)}];`);
+                        }
+                        arr.push(attr.value+'.call(this._proxy)');
+                        eval(arr.join(""));
+                    }, false)
+                }
+            })
+        })
+
         this._parent.replaceChild(root,this._root);
         this._root=root;
     }

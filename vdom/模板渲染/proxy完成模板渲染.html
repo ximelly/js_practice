@@ -11,6 +11,7 @@
     <div id="root">
         <div>标题：{{title}}</div>
         <div>内容：{{content}}</div>
+        <button @click="add">点击a++</button>
         {{a*b-c}}
     </div>
     <script type="text/javascript">
@@ -23,6 +24,12 @@
                     a:10,
                     b:2,
                     c:99
+                }
+            },
+            methods:{
+                add(){
+                    this.a+=1;
+                    console.log(this.a)
                 }
             }
         });
