@@ -11,7 +11,7 @@
     <div id="root">
         <div>标题：{{title}}</div>
         <div>内容：{{content}}</div>
-        {{title}}
+        {{a*b-c}}
     </div>
     <script type="text/javascript">
         let lxm=new LXM({
@@ -19,7 +19,10 @@
             data:function(){
                 return{
                     title:"I am title",
-                    content:"today is a good day"
+                    content:"today is a good day",
+                    a:10,
+                    b:2,
+                    c:99
                 }
             }
         });

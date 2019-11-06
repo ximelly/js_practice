@@ -26,9 +26,8 @@ class LXM{
     constructor(options={}){
         this._root=_getRooter(options);
         this.data=_getData(options.data);
-
-        this._template=this.root.cloneNode(true);//保存模板
-        this._parent=this.root.parentNode;//父元素
+        this._template=this._root.cloneNode(true);//保存模板
+        this._parent=this._root.parentNode;//父元素
         let _this=this;
         let proxy=new Proxy(this.data,{
                 get(data,key){
@@ -59,7 +58,14 @@ class LXM{
     _replace(data,type){
         let newDate=data.replace(/\{\{[^\}]+\}\}/g,(str)=>{
             str=str.substring(2,str.length-2).trim();
-            return this.data[str];
+            
+            //处理运算符
+            let arr=[];
+            for(let key in this.data){
+                arr.push(`let ${key}=${JSON.stringify(this.data[key])};`);
+            }
+            arr.push(str);
+            return eval(arr.join(""));
         })
         return newDate;
     }
