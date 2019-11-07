@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>XMLHttpRequest</title>
+</head>
+<body>
+    <script type="text/javascript">
+        let xhr=new XMLHttpRequest();
+
+        //每个阶段都会触发
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4&&(xhr.status>=200&&xhr.status<400)){
+                console.log(xhr.response,"onreadystatechange");
+            }
+        }
+
+        //请求成功后触发
+        xhr.onload=function(){
+            console.log(xhr.response,"onload");
+        }
+
+        xhr.open("GET","./data.json",true);//第三个参数是否使用异步
+        xhr.send(null);
+
+        //async/await被编译成一堆promise
+        async function show(){
+            await console.log(123);
+        }
+        let aa= show();
+        console.log(aa);//promise
+
+        /**跨域的标准
+          *域=协议+主域名+端口
+          *aa.com  请求www.aa.com     父级读子级不跨域
+          *aa.aa.com  请求www.aa.com  只要设置document.domain="aa.com"就不算跨域
+          *
+          * 同步 VS 异步
+          *异步的好处：性能高、用户体验号
+          *同步的好处：编写程序更简单
+          *用同步方法完成异步操作  async/await
+          *
+          *js是单线程，不支持异步
+          *async/await被编译成一堆promise
+          * 
+          * 为什么要限制跨域
+          * 防止跨站脚本攻击  注入代码
+          * 
+          * xhr.readyState
+          * 0：初始，刚创建XMLHttpRequest
+          * 1：已连接
+          * 2：请求已发送
+          * 3：已接收（header）
+          * 4：已接受（body）
+        **/
+    </script>
+</body>
+</html>
