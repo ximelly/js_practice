@@ -9,7 +9,8 @@
     <script type="text/javascript">
         let xhr=new XMLHttpRequest();
 
-        //每个阶段都会触发
+        //每个阶段都会触发   
+        //xhr.status：http状态码
         xhr.onreadystatechange=function(){
             if(xhr.readyState==4&&(xhr.status>=200&&xhr.status<400)){
                 console.log(xhr.response,"onreadystatechange");
@@ -47,7 +48,7 @@
           * 为什么要限制跨域
           * 防止跨站脚本攻击  注入代码
           * 
-          * xhr.readyState
+          * xhr.readyState：通讯状态
           * 0：初始，刚创建XMLHttpRequest
           * 1：已连接
           * 2：请求已发送
