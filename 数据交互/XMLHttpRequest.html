@@ -24,36 +24,28 @@
 
         xhr.open("GET","./data.json",true);//第三个参数是否使用异步
         xhr.send(null);
-
-        //async/await被编译成一堆promise
-        async function show(){
-            await console.log(123);
-        }
-        let aa= show();
-        console.log(aa);//promise
+        
 
         /**跨域的标准
-          *域=协议+主域名+端口
-          *aa.com  请求www.aa.com     父级读子级不跨域
-          *aa.aa.com  请求www.aa.com  只要设置document.domain="aa.com"就不算跨域
+          *  域=协议+主域名+端口
+          *  aa.com  请求www.aa.com     父级读子级不跨域
+          *  aa.aa.com  请求www.aa.com  只要设置document.domain="aa.com"就不算跨域
           *
-          * 同步 VS 异步
-          *异步的好处：性能高、用户体验号
-          *同步的好处：编写程序更简单
-          *用同步方法完成异步操作  async/await
-          *
-          *js是单线程，不支持异步
-          *async/await被编译成一堆promise
+          *为什么要限制跨域
+          *  防止跨站脚本攻击  注入代码
           * 
-          * 为什么要限制跨域
-          * 防止跨站脚本攻击  注入代码
+          *同步 VS 异步
+          *  异步的好处：性能高、用户体验号
+          *  同步的好处：编写程序更简单
+          *  用同步方法完成异步操作  async/await
+          *
           * 
           * xhr.readyState：通讯状态
-          * 0：初始，刚创建XMLHttpRequest
-          * 1：已连接
-          * 2：请求已发送
-          * 3：已接收（header）
-          * 4：已接受（body）
+          *   0：初始            刚创建XMLHttpRequest
+          *   1：已连接          open() 方法已经被调用
+          *   2：请求已发送       send()方法已经被调用，并且头部和状态已经可获得
+          *   3：已接收（header） 下载中，responseText 属性已经包含部分数据
+          *   4：已接受（body）   下载操作已完成
         **/
     </script>
 </body>
