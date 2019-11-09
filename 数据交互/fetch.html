@@ -19,6 +19,18 @@
             fetch("data.json").then(res=>res.json()).then(function(data){
                 console.log(data);
             });
+
+            //方法三：
+            (async ()=>{
+                let data=await (await fetch("data.json")).json();
+                console.log(data);
+            })();
+
+            //方法四：
+            (async ()=>{
+                let data=await fetch("data.json").then(res=>res.json());
+                console.log(data);
+            })();
         </script>
     </body>
 </html>
