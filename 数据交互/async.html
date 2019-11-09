@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>XMLHttpRequest</title>
+</head>
+<body>
+    <script type="text/javascript">
+        async function show(){
+            await console.log(123);
+        }
+        let aa= show();
+        console.log(aa);//promise
+
+        /**js是单线程，不支持异步
+          *async/await被编译成一堆promise
+        **/
+    </script>
+</body>
+</html>
