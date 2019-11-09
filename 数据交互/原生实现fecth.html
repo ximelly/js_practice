@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="./js/fetch.js"></script>
+    </head>
+    <body>
+        <script>
+            //方法一：
+            (async ()=>{
+                //接收头信息
+                let res=await fetch("../data/data.json",{
+                    method:"get",
+                    "content-type":"www-from-urlencoded",
+                    body:"a=23&b=11"
+                });
+                //接收body信息
+                let data=await res.json();
+                console.log(data);
+            })();
+
+        </script>
+    </body>
+</html>

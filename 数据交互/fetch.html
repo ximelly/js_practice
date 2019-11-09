@@ -8,7 +8,7 @@
             //方法一：
             (async ()=>{
                 //接收头信息
-                let res=await fetch("data.json");
+                let res=await fetch("../data/data.json");
 
                 //接收body信息
                 let data=await res.json();
@@ -16,21 +16,27 @@
             })();
 
             //方法二：
-            fetch("data.json").then(res=>res.json()).then(function(data){
+            fetch("../data/data.json").then(res=>res.json()).then(function(data){
                 console.log(data);
             });
 
             //方法三：
             (async ()=>{
-                let data=await (await fetch("data.json")).json();
+                let data=await (await fetch("../data/data.json")).json();
                 console.log(data);
             })();
 
             //方法四：
             (async ()=>{
-                let data=await fetch("data.json").then(res=>res.json());
+                let data=await fetch("../data/data.json").then(res=>res.json());
                 console.log(data);
             })();
+
+
+            /*
+            **优点：简单
+            **缺点：IE不兼容
+            */
         </script>
     </body>
 </html>
