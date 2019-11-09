@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <input type="file" id="fl" />
+        <img src="" alt="" id="img"/>
+        <script>
+            let fl=document.getElementById("fl"),
+                img=document.getElementById("img");
+            fl.onchange=function(){
+                let file=this.files[0];
+                console.log(file);
+                //创建临时地址 blob
+                let url=URL.createObjectURL(file);
+                console.log(url);
+                img.src=url;
+                document.body.appendChild(img);
+            }
+        </script>
+    </body>
+</html>
