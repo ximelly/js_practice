@@ -11,7 +11,9 @@
                 //接收头信息
                 let res=await fetch("../data/data.json",{
                     method:"get",
-                    "content-type":"www-from-urlencoded",
+                    headers: {
+                        "content-type":"www-from-urlencoded",
+                    },
                     body:"a=23&b=11"
                 });
                 //接收body信息

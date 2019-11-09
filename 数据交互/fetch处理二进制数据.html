@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <script>
+            (async ()=>{
+                let res=await fetch("images/IMG_0873.PNG");
+                let data=await res.blob();
+
+                //创建临时地址
+                let url=URL.createObjectURL(data);
+
+                let img=document.createElement("img");
+                img.src=url;
+                document.body.appendChild(img);
+            })();
+
+        </script>
+    </body>
+</html>
