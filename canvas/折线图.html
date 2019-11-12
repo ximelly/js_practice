@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            #my_canvas{
+                border:1px solid #cccc;
+                margin:50px auto 0;
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas width="400" height="300" id="my_canvas"></canvas>
+        <script type="text/javascript">
+            let data=[88,30,20,86,45],
+                cvs=document.getElementById("my_canvas"),
+                ctx=cvs.getContext("2d"),
+                padding={
+                    left:20,
+                    right:20,
+                    top:20,
+                    bottom:20
+                };
+
+            //计算可绘制区域宽高
+            let draw_w=cvs.width-padding.left-padding.right,
+                draw_h=cvs.height-padding.top-padding.bottom,
+                max=data.reduce((item,pre)=>Math.max(item,pre)),
+                min=data.reduce((item,pre)=>Math.min(item,pre)),
+                n=data.length;
+
+            //占总高度的比例
+            let scales=data.map(elem=>{
+                return (elem-min)/(max-min);
+            })
+            //计算x,y坐标
+            scales.forEach((scale,index)=>{
+                //1-scale 因为canvas中越小越在上面
+                let y=(1-scale)*draw_h+padding.top,
+                    x=draw_w*index/(n-1)+padding.left;
+                if(index==0){
+                    ctx.moveTo(x,y);
+                }else{
+                    ctx.lineTo(x, y);
+                }
+                console.log(x, y);
+            })
+
+            ctx.strokeStyle="#ff0000";
+            ctx.lineWidth="10";
+            ctx.stroke();
+        </script>
+    </body>
+</html>
