@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            #my_canvas{
+                border:1px solid #cccc;
+                margin:50px auto 0;
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas width="400" height="300" id="my_canvas"></canvas>
+        <script type="text/javascript">
+            let cvs=document.getElementById("my_canvas"),
+                ctx=cvs.getContext("2d");
+
+            ctx.moveTo(50,50);
+            ctx.lineTo(200, 200);   
+            ctx.strokeStyle="#ff0000";
+            ctx.lineWidth="10";
+            ctx.stroke();
+
+            //重置路径  要不然path会叠加 类似于ps中的取消选区
+            ctx.beginPath();
+
+            ctx.moveTo(100,50);
+            ctx.lineTo(600, 600);   
+            ctx.strokeStyle="#00ff00";
+            ctx.lineWidth="6";
+            ctx.stroke();
+        </script>
+    </body>
+</html>
