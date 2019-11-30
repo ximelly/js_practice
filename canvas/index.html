@@ -2,8 +2,10 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <script type="text/javascript" src="../js/assert.js"></script>
         <script type="text/javascript" src="js/sprite.js"></script>
         <script type="text/javascript" src="js/rect.js"></script>
+        <script type="text/javascript" src="js/canvas.js"></script>
         <style type="text/css">
             #my_canvas{
                 border:1px solid #cccc;
@@ -15,13 +17,9 @@
     <body>
         <canvas width="400" height="300" id="my_canvas"></canvas>
         <script type="text/javascript">
-            let cvs=document.getElementById("my_canvas"),
-                ctx=cvs.getContext("2d");
-
-            let rect=new Rect(20,20,100,100);
-
-            //将rect绘制到ctx上
-            rect.render(ctx);
+            let canvas=new Canvas(document.getElementById("my_canvas"));
+            canvas.creat("rect",20,20,100,100);
+            canvas.render();
         </script>
     </body>
 </html>
