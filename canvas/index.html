@@ -20,6 +20,7 @@
       let el=document.getElementById("my_canvas");
       let canvas=new Canvas(el);
       let rect=canvas.creat("rect",20,20,100,100);
+      rect.bgColor="#FF00FF";
       setInterval(()=>{
         rect.x=rect.x>=el.width?0:(rect.x+2);
         canvas.render();

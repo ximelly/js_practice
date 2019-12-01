@@ -7,6 +7,7 @@ class Rect extends Sprite{
     this._data.h=h;
   }
   render(ctx){
+    ctx.fillStyle=this._data.bgColor||"#000";
     ctx.fillRect(this._data.x, this._data.y, this._data.w, this._data.h);
   }
 }
