@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <script type="text/javascript" src="../js/assert.js"></script>
+    <script type="text/javascript" src="js/event.js"></script>
     <script type="text/javascript" src="js/sprite.js"></script>
     <script type="text/javascript" src="js/rect.js"></script>
     <script type="text/javascript" src="js/triangle.js"></script>
@@ -24,11 +25,12 @@
       let triangle=canvas.creat("triangle",200,20,100,100);
       rect.bgColor="#FF00FF";
       triangle.bgColor="#FFFF00";
-      setInterval(()=>{
-        rect.x=rect.x>=el.width?0:(rect.x+2);
-        triangle.w=triangle.w>=el.width/2?0:(triangle.w+2);
-        canvas.render();
-      },1000/60)
+      canvas.render();
+
+      //添加事件
+      rect.on("click",(x,y)=>{
+        console.log("点击了react",x,y);
+      });
     </script>
   </body>
 </html>
