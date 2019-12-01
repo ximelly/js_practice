@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body>
+    <script>
+      const event=new EventEmitter();
+      const drink=(person=>{
+          console.log(person+" drink");
+      });
+      event.on("drink",drink);
+      event.on("eat",person=>{
+          console.log(person+" eat");
+      });
+      event.once("buy",person=>{
+          console.log(person+" buy");
+      });
+      event.fire("drink","me");//me drink
+      event.fire("drink","me");//me drink
+      event.fire("eat","others");//others eat
+      event.fire("eat","others");//others eat
+      event.fire("buy","others");//others eat
+      event.fire("buy","others");//no
+      event.off("eat");
+      event.fire("eat","others");//no
+    </script>      
+  </body>
+</html>

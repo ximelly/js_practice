@@ -1,0 +1,35 @@
+class EventEmitter{
+  constructor(){
+    this._events={};
+  }
+  //监听事件，可被多次执行
+  on(type,fn,once){
+    once=once||false;
+    this._events[type]=this._events[type]||[];
+    this._events[type].push({
+      "fn":fn,
+      "once":once,
+      "count":0
+    });
+  }
+  //监听事件，只能执行一次
+  once(type,fn){
+    this.on(type,fn,true);
+  }
+  //触发指定的事件
+  fire(type,...args){
+    if(this._events[type]){
+      this._events[type].forEach((ev,index)=>{
+        if(ev.once&&ev.count>=1) return;
+        ev.fn(...args);
+        ev.count+=1;
+      })
+    }
+  }
+  //移除事件
+  off(type){
+    if(this._events[type]){
+      this._events[type]=[];
+    }
+  }
+}
