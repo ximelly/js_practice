@@ -1,13 +1,12 @@
 class Rect extends Sprite{
-    constructor(canvas,x,y,w,h){
-        super(canvas);
-        this.x=x;
-        this.y=y;
-        this.w=w;
-        this.h=h;
-        console.log(this);
-    }
-    render(ctx){
-        ctx.fillRect(this.x, this.y, this.w, this.h);
-    }
+  constructor(canvas,x,y,w,h){
+    super(canvas);
+    this._data.x=x;
+    this._data.y=y;
+    this._data.w=w;
+    this._data.h=h;
+  }
+  render(ctx){
+    ctx.fillRect(this._data.x, this._data.y, this._data.w, this._data.h);
+  }
 }
