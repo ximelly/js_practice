@@ -1,4 +1,7 @@
-let types={"rect":Rect};
+let types={
+  "rect":Rect,
+  "triangle":Triangle
+};
 
 class Canvas{
   constructor(canvas){

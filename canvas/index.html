@@ -5,6 +5,7 @@
     <script type="text/javascript" src="../js/assert.js"></script>
     <script type="text/javascript" src="js/sprite.js"></script>
     <script type="text/javascript" src="js/rect.js"></script>
+    <script type="text/javascript" src="js/triangle.js"></script>
     <script type="text/javascript" src="js/canvas.js"></script>
     <style type="text/css">
       #my_canvas{
@@ -20,9 +21,12 @@
       let el=document.getElementById("my_canvas");
       let canvas=new Canvas(el);
       let rect=canvas.creat("rect",20,20,100,100);
+      let triangle=canvas.creat("triangle",200,20,100,100);
       rect.bgColor="#FF00FF";
+      triangle.bgColor="#FFFF00";
       setInterval(()=>{
         rect.x=rect.x>=el.width?0:(rect.x+2);
+        triangle.w=triangle.w>=el.width/2?0:(triangle.w+2);
         canvas.render();
       },1000/60)
     </script>

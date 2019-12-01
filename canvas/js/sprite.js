@@ -9,7 +9,6 @@ class Sprite{
       w:0,h:0
     },{
       get(data,name){
-        assert(data[name]!=undefined);
         return data[name];
       },
       set(data,name,val){
