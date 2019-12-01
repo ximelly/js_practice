@@ -13,6 +13,7 @@ class Canvas{
     let sprite=new cls(this,...args);
     this._addChild(sprite);
     //返回sprite，以便后期需要对sprite进行修改
+    //返回sprite._data是因为要监听_data的变化
     return sprite._data;
   }
   _addChild(child){
