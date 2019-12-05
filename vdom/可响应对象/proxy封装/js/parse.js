@@ -21,14 +21,15 @@ function parse(dom){
             children:children,
             //<tag-search>：HTMLElement  <tagSearch>：HTMLUnknownElement
             isHtml:dom.constructor!==HTMLUnknownElement&&dom.constructor!==HTMLElement,
-            constructor:dom.constructor
+            el:dom
         }
     }else if(dom.nodeType==document.TEXT_NODE){
         let str=dom.data.trim();
         if(str){
             return {
                 type:"text",
-                data:dom.data.trim()
+                data:dom.data.trim(),
+                el:dom
             }
         }else{
             return undefined;
