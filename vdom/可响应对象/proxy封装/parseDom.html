@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="../../../js/assert.js"></script>
+    <script src="./js/parse.js"></script>
+    <title></title>
+</head>
+<body>
+    <div id="par" title="I am title" bind:click="clickDiv">
+        <span>span元素</span>
+        slajaslgjk
+        <cmp-search></cmp-search>
+        <div>div元素</div>
+    </div>
+    <script type="text/javascript">
+        let parseDom=parse(document.getElementById("par"));
+        console.log(parseDom);
+    </script>
+</body>
+</html>
