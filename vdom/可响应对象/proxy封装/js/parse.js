@@ -65,4 +65,9 @@ function parseDirective(attrs){
     }
     return directives;
 }
-export{parseDom,parseDirective}
+function parseListeners(directive){
+    assert(directive,"directive cannot be empty");
+    assert(directive instanceof Array,"directive cannot be Array");
+    let events=attributes.filter(item=>item.name=="on");
+}
+export{parseDom,parseDirective,parseListeners}
