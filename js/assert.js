@@ -3,3 +3,4 @@ function assert(bol,msg){
         throw new Error(msg||`${bol}`);
     }
 }
+export {assert}
