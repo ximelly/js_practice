@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id='app'></div>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<script>
+		let vm = new Vue({
+			el: '#app',
+			data:{
+				$name: '$name',
+				_name: '_name',
+				name: 'name',
+			}
+		})
+		//vm.xxx 以代理的形式访问  vm._data数据对象  vm._data = typeof data === 'function' ? data.call(vm, vm) : data || {};
+		console.warn(`${vm.$name}...${vm._data.$name}`) //undefined...$name
+		console.warn(`${vm._name}...${vm._data._name}`) //undefined..._name
+		console.warn(`${vm.name}...${vm._data.name}`)//name...name
+	</script>
+
+	<script>
+		let target
+		function observe(data){
+			for(let key in data){
+				let val = data[key], deps = []
+				if(Object.prototype.toString.call(val) === '[object Object]'){
+					observe(val)
+				}
+
+				Object.defineProperty(data, key, {
+					get(){
+						//收集依赖,此处push的为监听的方法
+						target && deps.push(target)
+						return val
+					},
+					set(newVal){
+						//触发更新
+						if(val === newVal) return
+						deps.forEach(func => func(newVal, val))
+						val = newVal
+					}
+				})
+			}
+		}
+		function $watch(str, fn){
+			target = fn
+			if(typeof str === 'function'){
+				str()
+			}else if(typeof str === 'string'){
+				//访问对应的值以出发get
+				let arr = str.split('.'), obj = data
+				arr.forEach(ls => {
+					obj = obj[ls]
+				})
+			}
+		}
+
+
+		let data = {
+			name: 'ximelly',
+			age: 30,
+			like: {
+				book: 'bookOne',
+				language: 'english'
+			}
+		}
+		observe(data)
+		$watch('like.language', function(newVal, oldVal){
+			console.warn(`名称由${oldVal}变为了${newVal}`)
+		})
+
+		$watch(function(){
+			with(data){
+				console.warn(`${name}...${age}`)
+			}
+		}, function(newVal, oldVal){
+			console.warn(`名称由${oldVal}变为了${newVal}`)
+		})
+
+		data.name = 'dusan'
+		data.like.language='chinese'
+
+	</script>
+</body>
+</html>
